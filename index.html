@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoiceDo — A modern voice-enabled to-do list and smart link manager." />
+  <title>VoiceDo — Voice-Enabled To-Do &amp; Link Manager</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Toast container ───────────────────────────────────────── -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="app-wrapper">
+
+    <!-- ── Header ──────────────────────────────────────────────── -->
+    <header class="app-header">
+      <div class="app-logo">
+        <div class="app-logo-icon" aria-hidden="true">
+          <i class="fas fa-microphone"></i>
+        </div>
+        <h1 class="app-title">Voice<span>Do</span></h1>
+      </div>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ── Speech unsupported banner ───────────────────────────── -->
+    <div
+      id="speech-banner"
+      class="speech-banner"
+      hidden
+      role="alert"
+    >
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>
+        Your browser doesn't support the Web Speech API. Voice input is unavailable —
+        please use Chrome or Edge for voice features.
+      </span>
+    </div>
+
+    <!-- ── Tab navigation ──────────────────────────────────────── -->
+    <nav class="tab-bar" role="tablist" aria-label="Main navigation">
+      <button
+        class="tab-btn active"
+        data-tab="todos"
+        role="tab"
+        aria-selected="true"
+        aria-controls="todos-panel"
+      >
+        <i class="fas fa-list-check"></i>
+        <span>Tasks</span>
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="links"
+        role="tab"
+        aria-selected="false"
+        aria-controls="links-panel"
+      >
+        <i class="fas fa-link"></i>
+        <span>Links</span>
+      </button>
+    </nav>
+
+    <!-- ── Main content ────────────────────────────────────────── -->
+    <main>
+
+      <!-- Tasks panel -->
+      <section
+        id="todos-panel"
+        class="tab-panel active"
+        role="tabpanel"
+        aria-labelledby=""
+        aria-hidden="false"
+      >
+        <form id="todo-form" class="input-area" aria-label="Add new task">
+          <button
+            type="button"
+            id="todo-mic-btn"
+            class="btn-mic"
+            aria-label="Start voice input"
+            title="Voice input"
+          >
+            <i class="fas fa-microphone"></i>
+          </button>
+          <input
+            type="text"
+            id="todo-input"
+            placeholder="Add a task… or tap the mic 🎙️"
+            autocomplete="off"
+            maxlength="500"
+            aria-label="Task text"
+          />
+          <button type="submit" class="btn-primary" aria-label="Add task">
+            Add
+          </button>
+        </form>
+
+        <!-- Task list -->
+        <div id="todo-list" aria-label="Task list" aria-live="polite"></div>
+      </section>
+
+      <!-- Links panel -->
+      <section
+        id="links-panel"
+        class="tab-panel"
+        role="tabpanel"
+        aria-hidden="true"
+      >
+        <form id="link-form" class="input-area" aria-label="Add new link">
+          <button
+            type="button"
+            id="link-mic-btn"
+            class="btn-mic"
+            aria-label="Start voice input for link"
+            title="Voice input for link"
+          >
+            <i class="fas fa-microphone"></i>
+          </button>
+          <input
+            type="url"
+            id="link-input"
+            placeholder="Paste a URL… or tap the mic 🔗"
+            autocomplete="off"
+            maxlength="2048"
+            aria-label="URL"
+          />
+          <button type="submit" class="btn-primary" aria-label="Save link">
+            Save
+          </button>
+        </form>
+
+        <!-- Link list -->
+        <div id="link-list" aria-label="Saved links" aria-live="polite"></div>
+      </section>
+
+    </main>
+
+    <!-- ── Footer ──────────────────────────────────────────────── -->
+    <footer class="app-footer">
+      <p>VoiceDo &mdash; Built with ♥ using vanilla HTML, CSS &amp; JS</p>
+    </footer>
+
+  </div><!-- /.app-wrapper -->
+
+  <!-- ── Scripts (order matters) ───────────────────────────────── -->
+  <script src="js/storage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/todos.js"></script>
+  <script src="js/links.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
