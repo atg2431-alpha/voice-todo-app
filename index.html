@@ -114,10 +114,85 @@
             maxlength="500"
             aria-label="Task text"
           />
+          <button
+            type="button"
+            id="todo-options-toggle"
+            class="btn-icon"
+            aria-label="Toggle task options"
+            aria-expanded="false"
+            aria-controls="todo-options"
+            title="More options"
+          >
+            <i class="fas fa-sliders"></i>
+          </button>
           <button type="submit" class="btn-primary" aria-label="Add task">
             Add
           </button>
         </form>
+
+        <!-- Collapsible task options -->
+        <div id="todo-options" class="todo-options" hidden aria-hidden="true">
+          <div class="options-row">
+            <div class="option-group">
+              <label for="todo-deadline" class="option-label">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i> Due date
+              </label>
+              <input
+                type="date"
+                id="todo-deadline"
+                class="options-input"
+                aria-label="Due date"
+              />
+            </div>
+            <div class="option-group">
+              <label for="todo-priority" class="option-label">
+                <i class="fas fa-flag" aria-hidden="true"></i> Priority
+              </label>
+              <select id="todo-priority" class="options-input options-select" aria-label="Priority">
+                <option value="low">🟢 Low</option>
+                <option value="medium" selected>🟡 Medium</option>
+                <option value="high">🔴 High</option>
+              </select>
+            </div>
+          </div>
+          <div class="option-group option-group-full">
+            <span class="option-label">
+              <i class="fas fa-tag" aria-hidden="true"></i> Categories
+            </span>
+            <div class="category-toggles" id="todo-categories" role="group" aria-label="Select categories">
+              <button type="button" class="cat-pill" data-cat="Work">Work</button>
+              <button type="button" class="cat-pill" data-cat="Personal">Personal</button>
+              <button type="button" class="cat-pill" data-cat="Shopping">Shopping</button>
+              <button type="button" class="cat-pill" data-cat="Health">Health</button>
+              <button type="button" class="cat-pill" data-cat="Study">Study</button>
+              <button type="button" class="cat-pill" data-cat="Other">Other</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter / sort bar -->
+        <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Filter and sort tasks">
+          <div class="filter-group" role="group" aria-label="Filter tasks">
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" data-filter="active" aria-pressed="false">Active</button>
+            <button class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+            <button class="filter-btn" data-filter="overdue" aria-pressed="false">Overdue</button>
+          </div>
+          <div class="sort-group">
+            <label for="sort-select" class="sort-label" aria-hidden="true">
+              <i class="fas fa-sort"></i>
+            </label>
+            <select id="sort-select" class="sort-select" aria-label="Sort tasks">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="deadline">Deadline soonest</option>
+              <option value="priority">Priority highest</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Progress summary -->
+        <div id="progress-summary" class="progress-summary" aria-live="polite" aria-label="Task progress"></div>
 
         <!-- Task list -->
         <div id="todo-list" aria-label="Task list" aria-live="polite"></div>
